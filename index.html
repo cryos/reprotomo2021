@@ -1,0 +1,514 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Reproducible Computational Imaging of Tomographic Data</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/simple.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <link rel="shortcut icon" href="./images/favicon_tomviz.png" />
+  </head>
+  <body>
+    <div class="reveal">
+      <!-- ====================== BETWEEN REVEAL AND SLIDES ====================== -->
+      <header class="left" style="position: absolute; left: 10px;"></header>
+      <header class="right" style="position: absolute; right: 10px;"></header>
+      <!-- ====================== BETWEEN REVEAL AND SLIDES ====================== -->
+      <div class="slides">
+			
+        <section>
+          <a href="http://tomviz.org/" class="image">
+            <img height="90" src="./images/tomviz_logo.png" alt="Tomviz">
+          </a>
+          <h3>Reproducible Computational Imaging of Tomographic Data</h3>
+          <h5>COIMG-053</h5>
+          <h4>Computational Imaging XIX</h4>
+          <h4>18 January, 2021</h4>
+          <h4>Marcus D. Hanwell, Computational Scientist, DAMA, BNL</h4>
+        </section>
+<!-- ====================== SLIDE TO THE LEFT ======================
+<section data-state="headleft">
+<style>.headleft header.left:after { content: "headline"; }</style>
+ ====================== SLIDE TO THE LEFT ====================== -->
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            ## Openness Improves Science
+
+            * Engaging, interactive visualizations
+            * Increasing openness and transparency
+             * Access to data
+             * Access to workflows
+             * Access to visualization and processing code
+             * Reproducible workflows
+            * Open science improves the connection to science
+          </textarea>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3>Tomviz: 3D Materials Tomography</h3>
+          <ul>
+            <li>Open source project, <a href="http://tomviz.org/">tomviz.org</a></li>
+            <li>DOE SBIR&mdash;Kitware-Cornell collaboration</li>
+            <li>Phase IIB&mdash;Kitware-Michigan collaboration</li>
+            <ul><li>Now complete, final report submitted 2020</li></ul>
+            <li>Focus on 3D tomography for materials</li>
+            <ul>
+              <li>Go from acquired data to final reconstruction</li>
+              <li>Possible to obtain atomic resolution in 3D</li>
+            </ul>
+          </ul>
+        </section>
+        <section data-background-image="./images/tomviz-screenshot.png" data-background-size="contain">
+          <h3>The Tomviz Application</h3>
+        </section>
+        <section>
+          <h3>Download Tomviz 1.9</h3>
+          Go to <a href="https://tomviz.org/downloads/">tomviz.org/downloads</a> now!
+          <img height="400" src="./images/tomviz_download.png" alt="Tomviz download" style="center">
+        </section>
+        <section>
+          <h3>Goals</h3>
+          <ul>
+            <li>Convert MATLAB tools developed at Cornell</li>
+            <ul>
+              <li>Required experts to use their code</li>
+              <li>Scalability issues, separate visalization tools</li>
+              <li>Required expensive MATLAB license</li>
+            </ul>
+            <li>Develop a user-friendly, open source tool</li>
+            <ul>
+              <li>Desktop application aimed at experimentalists</li>
+              <li>Offering an environment that can be extended</li>
+              <li>Primarily developed in C++</li>
+              <li>Python/Python wrapped C++ code</li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <h3>Goals</h3>
+          <ul>
+            <li>Provide a single software application for workflows</li>
+            <li>Make materials tomography reproducible</li>
+            <ul>
+              <li>Research into new reconstruction techniques</li>
+            </ul>
+            <li>Permissive BSD license&mdash;maximize reusability</li>
+            <ul>
+              <li>Including commercial reuse/proprietary</li>
+            </ul>
+            <li>Provide cross-platform self-contained installer</li>
+            <li>Highly interactive data visualization tool</li>
+            <li><b>Hardware acceleration</b> and <b>background threads</b></li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <img height="100" src="./images/tomviz_logo.png" alt="Tomviz" style="float: left">
+          <img width="32%" src="./images/tomviz-laptop.png" alt="Tomviz laptop" style="float: right">
+          <ul style="float: left; width:60%">
+            <li>Powerful&mdash;CPU, GPU, memory</li>
+            <li>Open source&mdash;BSD, GitHub</li>
+            <li>Open languages&mdash;C++, Python</li>
+          </ul>
+          <ul style="float: left">
+            <li>Open formats&mdash;TIFF, MRC, EMD (HDF5)</li>
+            <li>Scientific&mdash;SciPy, NumPy, ITK, VTK</li>
+            <li>Cross-platform&mdash;Windows, macOS, Linux</li>
+            <li>Shareable&mdash;Self-contained packaging</li>
+            <li>Reproducible&mdash;State files, pipelines</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Tomographic Workflow</h3>
+          <img height="500" src="./images/tomography_workflow.png" alt="Tomography workflow" style="center">
+        </section>
+        <section>
+          <h3>Data Collection: Experiment</h3>
+          <img height="500" src="./images/tomography_experiment.png" alt="Tomography experiment" style="center">
+        </section>
+        <section>
+          <h3>Tomographic Reconstruction</h3>
+          <img height="500" src="./images/tomography_recon.png" alt="Tomography reconstruction" style="center">
+        </section>
+        <section>
+          <h3>Core Problem</h3>
+          <ul>
+            <li>Tomography involves a complex set of steps</li>
+            <li>Collection, alignment, reconstruction, viz, ...</li>
+            <ul>
+              <li>Choices at any step can profoundly affect results</li>
+              <li>Changing early steps&mdash;rerun <i>everything!</i></li>
+            </ul>
+            <li>Develop an automated software platform</li>
+            <li>Make it easy to add new algorithms, etc</li>
+            <li>Could these steps be published with results</li>
+            <ul>
+              <li>Review of <i>all</i> steps, not just first/last</li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <h3>Software Stack</h3>
+          <img height="500" src="./images/tomviz_stack.png" alt="Tomviz stack" style="center">
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3>Building Blocks</h3>
+          <ul>
+            <li>Data sources</li>
+            <ul>
+              <li>Data read from files</li>
+              <li>Derived data, i.e. recontructions of tilt series</li>
+            </ul>
+            <li>Operators</li>
+            <ul>
+              <li>Operations on the data sources</li>
+              <li>Alignment, math, reconstruction, segmentation</li>
+            </ul>
+            <li>Modules</li>
+            <ul>
+              <li>Visualization, contouring, outlines, volumes</li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <h3>Python Operator</h3>
+          <img height="500" src="./images/tomviz_python_operator.png" alt="Tomviz Python operator" style="center">
+        </section>
+        <section>
+          <h3>Operator Data Flow</h3>
+          <img height="500" src="./images/tomviz-data-flow.png" alt="Tomviz Python operator" style="center">
+        </section>
+        <section>
+            <h3>Python Operator</h3>
+  <pre><code class="python" data-trim data-noescape>
+      # Transform entry point, do not change function name.
+      def transform_scalars(dataset):
+          """Define this method for Python operators that 
+          trnsform the input array"""
+          from tomviz import utils
+          import numpy as np
+          # Get the current volume as a numpy array.
+          array = utils.get_array(dataset)
+          # This is where you operate on your data.
+          result = np.sqrt(array) + 20
+          # Set the transformed data, it will displayed in Tomviz.
+          utils.set_array(dataset, result)
+      
+    </code></pre>
+          </section>
+        <section>
+          <h3>Make It Easy to Add Algorithms</h3>
+          <ul>
+            <li>Develop natural Python code using NumPy</li>
+            <li>Input 3D array from previous pipeline step</li>
+            <li>API to update user interface on progress</li>
+            <li>Provide an interactive editor for operators</li>
+            <li>Translation to/from application painless using views</li>
+            <li>Set output arrays, including tables, messages</li>
+            <li>Background thread, seamless to operator developer</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Reproducible Data Pipeline</h3>
+          <ul>
+            <li>The pipeline is central to the application</li>
+            <li>Document the path from raw data to final images</li>
+            <li>JSON format developed for reproducibility</li>
+            <ul>
+              <li>Entire pipeline saved to the <s>XML</s> JSON file</li>
+              <li>Relative file paths to enable sharing</li>
+              <li>Custom Python code embedded in state file</li>
+            </ul>
+            <li>Access to common file formats</li>
+            <li>Operators run in a background thread</li>
+            <ul>
+              <li>Remain interactive as operations are applied</li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <h3>Fragments of JSON State File</h3>
+<pre><code class="json" data-trim data-noescape>
+"reader": {
+  "fileNames": ["../Recon_NP_doi_10.1021-nl103400a.tif"],
+  "name": "TIFFSeriesReader"
+}
+</code></pre>
+<pre><code class="json" data-trim data-noescape>
+            "camera": {
+                "eyeAngle": 2,
+                "focalPoint": [ 49.5, 107.5, 130.0 ],
+                "parallelScale": 175.8,
+                "position": [ -332.0, 90.8, 96.3 ],
+                "viewAngle": 30,
+                "viewUp": [ -0.034, 0.994, -0.1005 ]
+            }
+</code></pre>
+        </section>
+        <section>
+          <h3>Fragments of JSON State File</h3>
+<pre><code class="json" data-trim data-noescape>
+                {
+                    "type": "Volume",
+                    "properties": {
+                        "blendingMode": 1, "interpolation": 1,
+                        "lighting": {
+                            "ambient": 0, "diffuse": 1,
+                            "enabled": false, "specular": 1,
+                            "specularPower": 100
+                        },
+                        "rayJittering": true, "transferMode": 0,
+                        "visibility": true
+                    },
+                    "useDetachedColorMap": false,
+                    "viewId": 2200
+                }
+	</code></pre>
+        </section>
+      </section>
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+          ## Building a Pipeline
+    
+          * First load a representative data set in Tomviz
+          * Then build a pipeline that gets the desired result
+          * Once things look good save the state
+           * JSON state file with complete pipeline
+           * Can be reloaded later, or executed in batch mode
+          </textarea>
+        </section>
+        <section>
+          <h3>Tomviz Pipeline</h3>
+          <img height="500" src="./images/tomviz-pipeline.png" alt="Tomviz pipeline" style="center">
+        </section>
+        <section>
+            <h3>Tomviz Pipeline</h3>
+            <img height="300" src="./images/tomviz-pipeline-zoom.png" alt="Tomviz pipeline" style="center">
+          </section>
+        <section>
+            <h3>Stripped Down State File: Pipeline</h3>
+  <pre><code class="json" data-trim data-noescape>
+{ "dataSources": [
+  {
+    "reader": { "fileNames": ["SMALL_PtCu.emd"],
+                "name": "EMDReader" },
+    "operators": [
+      {
+        "label": "Marcus Transform 1", "type": "Python",
+        "script": "# Source of Python operator.\n",
+      }, {
+        "label": "FFT (ABS LOG)", "type": "Python",
+        "script": "# Source of second Python operator.\n",
+        "dataSources": [ { "label": "Output",
+        "modules": [ { "type": "Outline", "viewId": 2200 },
+                     { "type": "Slice", "viewId": 2200 } ] } ]
+      }
+    ]
+  }
+]
+}      
+    </code></pre>
+        </section>
+        <section>
+            <h3>Using Python Pipeline Runner</h3>
+  <pre><code class="shell" data-trim data-noescape>
+      marcus@dilithium:~$ tomviz-pipeline -s tomviz-custom-fft.tvsm 
+      [09:18:17] INFO: Executing 'Marcus Transform 1' operator
+      Operator doesn't support progress updates.
+      [09:18:19] INFO: Execution complete.
+      [09:18:19] INFO: Executing 'FFT (ABS LOG)' operator
+      Operator doesn't support progress updates.
+      [09:19:59] INFO: Execution complete.
+      [09:19:59] INFO: Writing transformed data.
+      [09:20:03] INFO: Write complete.     
+    </code></pre>
+        </section>
+        <section>
+            <h3>Tomviz Pipeline vs Python Execution</h3>
+            <img height="500" src="./images/tomviz-pipeline-compare.png" alt="Tomviz pipeline comparison to batch" style="center">
+          </section>
+          <section data-markdown>
+              <textarea data-template>
+              ## Batch Execution of Pipelines
+        
+              * Currently runs in Docker Python process
+               * Can be run by hand as shown
+               * File name can be modified, run again
+              * Pipeline runner only sees data source and operators
+               * Loads EMD file (HDF5) for start of pipeline
+               * Executes each operator in sequence
+               * Writes out result as an EMD (HDF5) file
+              * Can be adapted to run in Jupyter/IPython
+              </textarea>
+            </section>
+      </section>
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            ## Highlights of New Features
+
+            * Pipeline rewritten to support more
+             * Live updates of long-running reconstructions
+             * Support "growing" as data is acquired on TEM
+            * Working on multi-modal/multi-channel
+             * Build awareness of more than one data channel
+             * Hoping to load channels lazily on demand
+          </textarea>
+        </section>
+        <section>
+          <h2>Live Pipeline</h2>
+          <img height="500" src="./images/tomviz-recol.gif" alt="Tomviz live acquisition" style="center">
+        </section>
+        <section>
+          <h2>Live Iterative Recontruction</h2>
+          <img height="500" src="./images/tomviz-live-reco.png" alt="Tomviz live reconstruction" style="center">
+        </section>
+        <section data-markdown>
+          <textarea data-template>
+            ## Highlights of New Features
+
+            * Run the operator pipeline in a Docker container
+             * Serialized to JSON, HDF5 input/output
+             * Largely unchanged Python operators
+            * Image stack dialog for easier stack loading
+             * Supports various numbering schemes
+             * Extract angles encoded in file names
+            * Atomic visualization
+             * Atomic electron tomography and atom probe tomography
+          </textarea>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
+            ## Acquistion and Execution
+
+            * Acquisition client-server approach
+             * Windows XP, 32 bit locked down machine...
+             * Python, Bottle, simple API to work with TEM
+            * External pipeline execution
+             * Run in batch, even on bulk data
+             * Run in Docker, Conda Python
+          </textarea>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
+            ## X-ray Beamlines
+            * Adding dark and white field data
+            * Integration with TomoPy for reconstruction
+            * Additional file formats
+             * DataExchange, custom HDF5, FXI
+            * Supporting multiple data channels
+             * Additional Python API to read/write
+             * New user interface to interact
+             * Examining new color mappings
+          </textarea>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
+            ## DataBroker and Bluesky
+            * Conda packaging to integrate better
+            * New RESTful services being developed
+             * Build new UI to interact with servers
+             * Initially data lookup/download
+             * Hook into "live" pipeline for Bluesky?
+            * Add capability to upload analysis
+             * Use HDF5 and JSON pipeline with UID
+            * Trigger workflows on demand using APIs?
+          </textarea>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
+            ## Documentation 
+
+            * Hosted at <a href="https://tomviz.readthedocs.io">tomviz.readthedocs.io</a>
+            <img height="500" src="./images/readthedocs.png" alt="Tomviz documentation" style="center">
+          </textarea>
+        </section>
+      </section>
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            ## Closing Thoughts
+
+            * Permissively licensed (BSD) open community project
+            * Need for deeper collaborations
+             * Latest reconstruction techniques, alignment, etc
+             * Improve data structures, formats, exchange
+            * Reproducibility is essential for improved imaging
+             * Rich applications built to record all steps
+            * Open software ecosystem for materials tomography
+            * Working at NSLS-II to extend to X-ray beamlines
+             * Data APIs, richer formats, reproducibility
+          </textarea>
+        </section>
+        <section>
+          <h3>People and Funding</h3>
+          <p>We have a fantastic team of developers and collaborators including: David Muller, Robert Hovden, Chris Harris, Alessandro Genova, Brianna Major, Peter Ercius, Yi Jiang, Jonathan Schwartz, Elliot Padgett, Barnaby Levin, Colin Ophus, John Miao, Stuart Campbell, Robert Maynard, Utkarsh Ayachit, Sebastien Jourdain, Matt McCormick, Alvaro Sanchez, Dan Allen, Berk Geveci, Martin Turner, Dula Parkinson, ...</p>
+          <p>Also funding from the Department of Energy, Office of Science under contract DE-SC0011385</p>
+        </section>
+        <section>
+          <h3>TEM Microscope at NCEM (LBNL)</h3>
+          <img height="500" src="./images/tem_ncem.jpg" alt="TEM microscope" style="center">
+        </section>
+        <section>
+          <h3>Tomviz Data Acquisition</h3>
+          <img height="500" src="./images/tomviz_acquire.jpg" alt="Nanotube" style="center">
+        </section>
+        <section>
+          <h3>Tomviz Hackathon</h3>
+          <img height="500" src="./images/tomviz_hackathon.jpg" alt="Tomiz hackathon" style="center">
+        </section>
+        <section>
+          <h3>Advanced Volume Rendering</h3>
+          <img height="500" src="./images/small_nanotube.gif" alt="Nanotube" style="center">
+        </section>
+      </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        history: true,
+        center: true,
+        slideNumber: true,
+        math: {
+          mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/math/math.js', async: true }
+          ]
+        });
+    </script>
+  </body>
+</html>
